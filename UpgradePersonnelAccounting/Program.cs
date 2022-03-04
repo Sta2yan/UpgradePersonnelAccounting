@@ -65,7 +65,9 @@ namespace UpgradePersonnelAccounting
                 Console.WriteLine($"Добавлено новое досье: ФИО: {addedFullName} | Позиция: {addedPosition}");
             }
             else
+            {
                 Console.WriteLine("Не удалось добавить сотрудника.");
+            }
 
             Console.ReadKey();
             Console.Clear();
