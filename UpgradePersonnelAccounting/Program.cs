@@ -59,7 +59,7 @@ namespace UpgradePersonnelAccounting
             Console.WriteLine("Заполните должность сотрудника:");
             string addedPosition = Console.ReadLine();
             
-            if (CheckKeyInDictionary(dictionaryDossiers, addedFullName) == false)
+            if (dictionaryDossiers.ContainsKey(addedFullName) == false)
             {
                 dictionaryDossiers.Add(addedFullName, addedPosition);
                 Console.WriteLine($"Добавлено новое досье: ФИО: {addedFullName} | Позиция: {addedPosition}");
@@ -85,19 +85,6 @@ namespace UpgradePersonnelAccounting
             Console.Clear();
         }
 
-        static bool CheckKeyInDictionary(Dictionary<string, string> dictionaryDossiers, string key)
-        {
-            foreach (var item in dictionaryDossiers)
-            {
-                if (item.Key == key)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         static void DeleteDossier(Dictionary<string, string> dictionaryDossiers)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -105,14 +92,11 @@ namespace UpgradePersonnelAccounting
             Console.WriteLine("Заполните ФИО сотрудника, которого хотите удалить из досье:");
             string remoteFullName = Console.ReadLine();
 
-            foreach (var employee in dictionaryDossiers)
+            if (dictionaryDossiers.ContainsKey(remoteFullName))
             {
-                if (employee.Key.Equals(remoteFullName))
-                {
-                    Console.WriteLine($"Удален сотрудник:" +
-                                        $"ФИО: {employee.Key} | Должность: {employee.Value}");
-                    dictionaryDossiers.Remove(employee.Key);
-                }
+                Console.WriteLine($"Удален сотрудник:" +
+                                    $"ФИО: {remoteFullName} | Должность: {dictionaryDossiers[remoteFullName]}");
+                dictionaryDossiers.Remove(remoteFullName);
             }
         }
 
