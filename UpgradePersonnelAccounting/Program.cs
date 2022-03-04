@@ -58,10 +58,15 @@ namespace UpgradePersonnelAccounting
             string addedFullName = Console.ReadLine();
             Console.WriteLine("Заполните должность сотрудника:");
             string addedPosition = Console.ReadLine();
+            
+            if (CheckKeyInDictionary(dictionaryDossiers, addedFullName) == false)
+            {
+                dictionaryDossiers.Add(addedFullName, addedPosition);
+                Console.WriteLine($"Добавлено новое досье: ФИО: {addedFullName} | Позиция: {addedPosition}");
+            }
+            else
+                Console.WriteLine("Не удалось добавить сотрудника.");
 
-            dictionaryDossiers.Add(addedFullName, addedPosition);
-
-            Console.WriteLine($"Добавлено новое досье: ФИО: {addedFullName} | Позиция: {addedPosition}");
             Console.ReadKey();
             Console.Clear();
         }
@@ -78,6 +83,19 @@ namespace UpgradePersonnelAccounting
 
             Console.ReadKey();
             Console.Clear();
+        }
+
+        static bool CheckKeyInDictionary(Dictionary<string, string> dictionaryDossiers, string key)
+        {
+            foreach (var item in dictionaryDossiers)
+            {
+                if (item.Key == key)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         static void DeleteDossier(Dictionary<string, string> dictionaryDossiers)
